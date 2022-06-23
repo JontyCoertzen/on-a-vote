@@ -1,4 +1,5 @@
 import { trpc } from "@utils/trpc";
+import Link from "next/link";
 import React from "react";
 
 const QuestionCreator: React.FC = () => {
@@ -40,7 +41,9 @@ export default function Home() {
         <div className="text-2xl font-bold">Questions</div>
         {data?.map((question) => (
           <div key={question.id} className="my-2">
-            {question.question}
+            <Link href={`/question/${question.id}`}>
+              <a>{question.question}</a>
+            </Link>
           </div>
         ))}
         <QuestionCreator />
