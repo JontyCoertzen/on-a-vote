@@ -1,12 +1,15 @@
-import Head from "next/head";
+import { trpc } from "@utils/trpc";
 
-import { prisma } from "../db/client";
-import { trpc } from "../utils/trpc";
+export default function Home() {
+  const { data, error, isLoading } = trpc.useQuery(["questions.get-all"]);
 
-export default function Home(props: any) {
-  const { data, isLoading } = trpc.useQuery(["getAllQuestions"]);
+  console.log(data, error, isLoading);
+  if (error) {
+    console.log(error);
+    return <div>ERROR</div>;
+  }
 
-  if (isLoading || !data) return <div>Loading</div>;
+  if (isLoading) return <div>Loading</div>;
 
-  return <div>{data[0]?.question}</div>;
+  return <div>{data?.[0]?.question}</div>;
 }
