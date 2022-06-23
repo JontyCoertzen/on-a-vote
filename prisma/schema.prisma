@@ -13,10 +13,8 @@ datasource db {
 }
 
 model PollQuestion {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-
-  endsAt DateTime?
-
-  question String
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  endsAt    DateTime?
+  question  String    @db.VarChar(5000)
 }
