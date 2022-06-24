@@ -4,9 +4,13 @@ import { prisma } from "@db/client";
 import { createRouter } from "./context";
 
 export const questionRouter = createRouter()
-  .query("get-all", {
-    async resolve() {
-      return await prisma.pollQuestion.findMany();
+  .query("get-all-my-questions", {
+    async resolve({ ctx }) {
+      return await prisma.pollQuestion.findMany({
+        where: {
+          ownerToken: ctx.token,
+        },
+      });
     },
   })
   .query("get-by-id", {
