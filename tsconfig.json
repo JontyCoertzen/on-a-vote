@@ -19,6 +19,7 @@
     "paths": {
       "@backend/*": ["./src/backend/*"],
       "@db/*": ["./src/db/*"],
+      "@shared/*": ["./src/shared/*"],
       "@styles/*": ["./src/styles/*"],
       "@utils/*": ["./src/utils/*"]
     }

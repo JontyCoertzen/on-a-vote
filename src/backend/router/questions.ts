@@ -2,6 +2,7 @@ import * as trpc from "@trpc/server";
 import { z } from "zod";
 import { prisma } from "@db/client";
 import { createRouter } from "./context";
+import { CreateQuestionValidtor } from "@shared/CreateQuestionValidator";
 
 export const questionRouter = createRouter()
   .query("get-all-my-questions", {
@@ -28,12 +29,9 @@ export const questionRouter = createRouter()
     },
   })
   .mutation("create", {
-    input: z.object({
-      question: z.string().min(5).max(600),
-    }),
-
+    input: CreateQuestionValidtor,
     async resolve({ input, ctx }) {
-      if (!ctx.token) return { error: "Token not found" };
+      if (!ctx.token) throw new Error("Unauthorized");
 
       return await prisma.pollQuestion.create({
         data: {
