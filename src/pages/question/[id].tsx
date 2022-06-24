@@ -11,13 +11,10 @@ const QuestionsPageContent: React.FC<{ id: string }> = ({ id }) => {
 
   return (
     <div className="p-8 flex flex-col">
-      {data?.isOwner && (
-        <div className="bg-red-700 text-white rounded p-3">You made this</div>
-      )}
       <div className="text-2xl font-bold">{data?.question?.question}</div>
       <div>
-        {(data?.question?.options as string[])?.map((option) => (
-          <div>{option}</div>
+        {(data?.question?.options as { text: string }[])?.map((option) => (
+          <div>{option.text}</div>
         ))}
       </div>
     </div>
