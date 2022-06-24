@@ -40,11 +40,11 @@ export default function Home() {
       <div className="flex flex-col">
         <div className="text-2xl font-bold">Questions</div>
         {data?.map((question) => (
-          <div key={question.id} className="my-2">
-            <Link href={`/question/${question.id}`}>
-              <a>{question.question}</a>
-            </Link>
-          </div>
+          <Link key={question.id} href={`/question/${question.id}`}>
+            <a>
+              <div className="my-2">{question.question}</div>
+            </a>
+          </Link>
         ))}
         <QuestionCreator />
       </div>
